@@ -1,0 +1,241 @@
+<html>
+<head>
+<title>Variables Globales y Locales - Minecraft</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        background-color: #dddddd;
+    }
+    #menu {
+        float: left;
+        width: 200px;
+        height: 100vh;
+        background-color: #8B5A2B; /* tierra */
+        border-right: 6px solid #555555;
+    }
+    #menu h3 {
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 20px 10px;
+        background-color: #3f7d20; /* pasto */
+    }
+    #menu a {
+        display: block;
+        padding: 15px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 3px solid #5c3a1a;
+        cursor: pointer;
+    }
+    #menu a:hover {
+        background-color: #3f7d20;
+    }
+    #contenido {
+        margin-left: 230px;
+        padding: 20px;
+    }
+    h1 {
+        color: #3f7d20;
+    }
+    .caja {
+        background-color: white;
+        border: 4px solid #555555;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    pre {
+        background-color: #333333;
+        color: #55ff55;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .salida {
+        background-color: #bbbbbb;
+        border: 3px solid #555555;
+        padding: 10px;
+        font-weight: bold;
+    }
+    button {
+        background-color: #3f7d20;
+        color: white;
+        border: 3px solid #555555;
+        padding: 8px 16px;
+        font-family: Arial;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #2c5a15;
+    }
+    .oculto {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<!-- MENU VERTICAL -->
+<div id="menu">
+    <h3>MINECRAFT</h3>
+    <a onclick="mostrar('inicio')">Inicio</a>
+    <a onclick="mostrar('global')">Ejercicio 1: Global</a>
+    <a onclick="mostrar('local')">Ejercicio 2: Local</a>
+    <a onclick="mostrar('combinado')">Ejercicio 3: Global y Local</a>
+</div>
+
+<!-- CONTENIDO -->
+<div id="contenido">
+
+    <!-- INICIO -->
+    <div id="inicio">
+        <h1>Variables Globales y Locales</h1>
+        <div class="caja">
+            <p>Bienvenido al mundo de Minecraft de las variables.</p>
+            <p><b>Variable global:</b> es como el mundo de Minecraft, todos pueden verla y usarla.</p>
+            <p><b>Variable local:</b> es como un cofre privado, solo existe dentro de su función.</p>
+            <p>Elige un ejercicio en el menú de la izquierda.</p>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 1: GLOBAL -->
+    <div id="global" class="oculto">
+        <h1>Ejercicio 1: Variable Global</h1>
+        <div class="caja">
+            <p>La variable <b>mundo</b> se declara fuera de la función, por eso la función la puede usar.</p>
+            <pre>
+var mundo = "Soy una variable global: el mundo de Minecraft";
+
+function miFuncion() {
+    document.write(mundo);
+}
+
+miFuncion(); // Salida: Soy una variable global
+            </pre>
+            <button onclick="ejecutarGlobal()">Ejecutar</button>
+            <p>Salida:</p>
+            <div class="salida" id="salidaGlobal">(presiona Ejecutar)</div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 2: LOCAL -->
+    <div id="local" class="oculto">
+        <h1>Ejercicio 2: Variable Local</h1>
+        <div class="caja">
+            <p>La variable <b>cofre</b> se declara dentro de la función, por eso solo existe ahí.</p>
+            <pre>
+function miFuncion() {
+    var cofre = "Soy una variable local: un cofre privado";
+    document.write(cofre);
+}
+
+miFuncion(); // Salida: Soy una variable local
+document.write(cofre); // Error: cofre no está definida
+            </pre>
+            <button onclick="ejecutarLocal()">Ejecutar</button>
+            <p>Salida:</p>
+            <div class="salida" id="salidaLocal">(presiona Ejecutar)</div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 3: GLOBAL Y LOCAL COMBINADAS -->
+    <div id="combinado" class="oculto">
+        <h1>Ejercicio 3: Global y Local juntas</h1>
+        <div class="caja">
+            <p>La variable <b>diamantes</b> es global (el inventario del mundo) y la variable <b>encontrados</b> es local (solo existe dentro de la mina).</p>
+            <pre>
+var diamantes = 10; // global
+
+function minar() {
+    var encontrados = 3; // local
+    diamantes = diamantes + encontrados; // usa las dos
+    document.write("Encontré " + encontrados + " diamantes.&lt;br&gt;");
+    document.write("Dentro de la función tengo " + diamantes);
+}
+
+minar();
+document.write(diamantes);   // Funciona: es global
+document.write(encontrados); // Error: es local
+            </pre>
+            <button onclick="ejecutarCombinado()">Ejecutar</button>
+            <p>Salida:</p>
+            <div class="salida" id="salidaCombinado">(presiona Ejecutar)</div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+// Menú: muestra solo la sección elegida
+function mostrar(seccion) {
+    document.getElementById("inicio").className = "oculto";
+    document.getElementById("global").className = "oculto";
+    document.getElementById("local").className = "oculto";
+    document.getElementById("combinado").className = "oculto";
+    document.getElementById(seccion).className = "";
+}
+
+// ---------- EJERCICIO 1: GLOBAL ----------
+var mundo = "Soy una variable global: el mundo de Minecraft";
+
+function funcionGlobal() {
+    return mundo; // la función puede usar la variable global
+}
+
+function ejecutarGlobal() {
+    document.getElementById("salidaGlobal").innerHTML = funcionGlobal();
+}
+
+// ---------- EJERCICIO 2: LOCAL ----------
+function funcionLocal() {
+    var cofre = "Soy una variable local: un cofre privado";
+    return cofre;
+}
+
+function ejecutarLocal() {
+    var texto = funcionLocal() + "<br>";
+
+    // Intentamos usar la variable local fuera de la función
+    try {
+        texto = texto + cofre;
+    } catch (e) {
+        texto = texto + "Error: la variable cofre no está definida fuera de la función";
+    }
+
+    document.getElementById("salidaLocal").innerHTML = texto;
+}
+
+// ---------- EJERCICIO 3: GLOBAL Y LOCAL ----------
+var diamantes = 10; // global
+
+function minar() {
+    var encontrados = 3; // local
+    diamantes = diamantes + encontrados; // usa la global y la local
+    return "Encontré " + encontrados + " diamantes.<br>" +
+           "Dentro de la función tengo " + diamantes + " en total.";
+}
+
+function ejecutarCombinado() {
+    diamantes = 10; // reiniciamos para poder repetir el ejercicio
+    var texto = minar() + "<br>";
+
+    // La global sí se puede usar fuera de la función
+    texto = texto + "Fuera de la función, diamantes = " + diamantes + "<br>";
+
+    // La local no existe fuera de la función
+    try {
+        texto = texto + encontrados;
+    } catch (e) {
+        texto = texto + "Error: la variable encontrados no está definida fuera de la función";
+    }
+
+    document.getElementById("salidaCombinado").innerHTML = texto;
+}
+
+</script>
+
+</body>
+</html>
